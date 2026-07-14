@@ -9,12 +9,10 @@ public class GradebookStudent {
         grades = new ArrayList<>();
     }
 
-    public GradebookStudent(int i, String n, ArrayList<GradeItem> g) {
+    public GradebookStudent(int i, String n) {
         if(id > 0) i = id;
         
         if(!name.trim().equals(null) || !name.trim().equals("")) name = n;
-
-        grades = g;
         
     }
 
@@ -27,6 +25,8 @@ public class GradebookStudent {
         return name;
     }
 
-
+    public ArrayList<GradeItem> getGrades(){
+        return grades;
+    }
 }
 
