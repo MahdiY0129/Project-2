@@ -22,7 +22,11 @@ public class GradebookStudent {
         return name + "has a " + calculateAverage() + " average.";
     }
 
-
+    public void makeScores() {
+        for(GradeItem g : grades) {
+        //    grades.add(grades.get()); will finish later
+        }
+    }
     public double calculateAverage() {
         if(grades.size()==0) return 0.0;
         else {int sum = 0;
@@ -32,6 +36,7 @@ public class GradebookStudent {
         return sum/grades.size();
         }
     }
+    
     public int getId() {
         return id;
     }
