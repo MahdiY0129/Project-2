@@ -5,35 +5,30 @@ public class GradebookStudent {
     private String name;
     private ArrayList<GradeItem> grades;
 
-    public GradebookStudent() {
+    public GradebookStudent(int i, String n) {
+        if(id <= 0) throw new IllegalArgumentException("Enter a valid ID.");
+        if (n == null || n.trim().isEmpty()) throw new IllegalArgumentException("Write a proper name.");        
+        id = i;
+        name = n;
         grades = new ArrayList<>();
     }
 
-    public GradebookStudent(int i, String n) {
-        if(id < 0) throw new IllegalArgumentException("Enter a valid ID.");
-        
-        if(name.trim().equals(null) || name.trim().equals("")) throw new IllegalArgumentException("Write a proper name.");
-        
-        i = id;
-        n = name;
+    public void addGrade(GradeItem g) {
+        grades.add(g);
     }
 
     public String describe() {
+        if (grades.isEmpty()) return name + " has no grades yet.";
         return name + "has a " + calculateAverage() + " average.";
     }
 
-    public void makeScores() {
-        for(GradeItem g : grades) {
-        //    grades.add(grades.get()); will finish later
-        }
-    }
     public double calculateAverage() {
         if(grades.size()==0) return 0.0;
         else {int sum = 0;
         for (GradeItem g : grades) {
             sum += g.getScore();
         }
-        return sum/grades.size();
+        return (double)sum/grades.size();
         }
     }
     
@@ -46,7 +41,7 @@ public class GradebookStudent {
     }
 
     public ArrayList<GradeItem> getGrades(){
-        return grades;
+        return new ArrayList<>(grades);
     }
 }
 
