@@ -19,14 +19,14 @@ public class GradebookApp {
 
                 switch (choice) {
                     case 1:
-                        System.out.println("Enter student name and id in this format (name, id): ");
+                        System.out.print("Enter student name and id in this format (name, id): ");
                         String name = sc.next(); 
                         int id = sc.nextInt(); 
                         manager.addStudent(new GradebookStudent(id, name));
                         break;
 
                     case 2:
-                        System.out.println("Enter student id, grade title, and the score (id, title, score): ");
+                        System.out.print("Enter student id, grade title, and the score (id, title, score): ");
                         int id2 = sc.nextInt(); 
                         String title = sc.next(); 
                         double score = Double.parseDouble(sc.next()); 
@@ -34,20 +34,20 @@ public class GradebookApp {
                         break;
                         
                     case 3:
-                        System.out.println("Enter the students id of the student's detail you want to view: ");
+                        System.out.print("Enter the students id of the student's detail you want to view: ");
                         int id3 = sc.nextInt(); 
                         manager.viewOneStudent(id3);
                         break;
 
                     case 4:
-                        System.out.println("Enter the student id: ");
-                        int id4 = sc.nextInt(); 
-                        GradebookStudent student = manager.findByID(id4); 
-                        System.out.println("Students name is: " + student.getName());
+                        
                         break;
                     
                     case 5:
-                        
+                        System.out.print("Enter the student id: ");
+                        int id4 = sc.nextInt(); 
+                        GradebookStudent student = manager.findByID(id4); 
+                        System.out.println("Students name is: " + student.getName());
                         break;
 
                     case 6:
@@ -82,7 +82,7 @@ public class GradebookApp {
         System.out.println("6. Load Data from File");
         System.out.println("7. Save Data to File");
         System.out.println("8. Exit");
-        System.out.println("Enter choice: ");
+        System.out.print("Enter choice: ");
     }
 
     public static void saveData(ArrayList<GradebookStudent> roster, ArrayList<GradeItem> grades, String path) throws IOException {
