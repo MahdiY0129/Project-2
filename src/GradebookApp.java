@@ -10,6 +10,7 @@ public class GradebookApp {
         boolean exit = false;
         System.out.println("==== Gradebook Manager ===="); 
         Scanner sc = new Scanner(System.in); 
+        GradebookManager manager = new GradebookManager(); 
         
         while(exit == false){
             try{
@@ -18,19 +19,31 @@ public class GradebookApp {
 
                 switch (choice) {
                     case 1:
-                        
+                        System.out.println("Enter student name and id in this format (name, id): ");
+                        String name = sc.next(); 
+                        int id = sc.nextInt(); 
+                        manager.addStudent(new GradebookStudent(id, name));
                         break;
 
                     case 2:
-
+                        System.out.println("Enter student id, grade title, and the score (id, title, score): ");
+                        int id2 = sc.nextInt(); 
+                        String title = sc.next(); 
+                        double score = Double.parseDouble(sc.next()); 
+                        manager.addGradeToStudent(id2, title, score);
                         break;
                         
                     case 3:
-                        
+                        System.out.println("Enter the students id of the student's detail you want to view: ");
+                        int id3 = sc.nextInt(); 
+                        manager.viewOneStudent(id3);
                         break;
 
                     case 4:
-
+                        System.out.println("Enter the student id: ");
+                        int id4 = sc.nextInt(); 
+                        GradebookStudent student = manager.findByID(id4); 
+                        System.out.println("Students name is: " + student.getName());
                         break;
                     
                     case 5:
@@ -54,6 +67,8 @@ public class GradebookApp {
                 }
             } catch(IllegalArgumentException e){
                 System.out.println(e.getMessage());
+            }catch(Exception e){
+                System.out.println("Invalid input!");
             }
         }
     }

@@ -41,7 +41,15 @@ public class GradebookManager {
     public void addGradeToStudent(int id, String title, double score){
         for (GradebookStudent s : students) {
             if (s.getId() == id){
+                s.addGrade(new GradeItem(title, score));
+            }
+        }
+    }
 
+    public void viewOneStudent(int id){
+        for (GradebookStudent s : students) {
+            if(s.getId() == id){
+                System.out.println(s.describe());
             }
         }
     }
