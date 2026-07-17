@@ -70,6 +70,19 @@ public class GradebookApp {
         System.out.println("Enter choice: ");
     }
 
+    public static void saveData(ArrayList<GradebookStudent> roster, ArrayList<GradeItem> grades, String path) throws IOException {
+        PrintWriter out = new PrintWriter(path);
+
+        
+        for(GradebookStudent student : roster) {
+            out.println("STUDENT," + student.getId() + "," + student.getName());
+            for(GradeItem grade : student.getGrades()) {
+                out.println("GRADE," + student.getId() + "," + grade.getTitle() + "," + grade.getScore());
+            }
+        }
+
+        out.close();
+    }
 
 
 }
