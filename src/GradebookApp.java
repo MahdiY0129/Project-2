@@ -12,6 +12,7 @@ public class GradebookApp {
         System.out.println("");
         Scanner sc = new Scanner(System.in); 
         GradebookManager manager = new GradebookManager(); 
+        ArrayList<GradebookStudent> roster = new ArrayList<>();
         
         while(exit == false){
             try{
@@ -35,19 +36,19 @@ public class GradebookApp {
                         break;
                         
                     case 3:
-                        System.out.print("Enter the students id of the student's detail you want to view: ");
-                        int id3 = sc.nextInt(); 
-                        manager.viewOneStudent(id3);
+                        
                         break;
 
                     case 4:
-                        
+                        System.out.print("Enter the students id of the student's detail you want to view: ");
+                        int id4 = sc.nextInt(); 
+                        manager.viewOneStudent(id4);
                         break;
                     
                     case 5:
                         System.out.print("Enter the student id: ");
-                        int id4 = sc.nextInt(); 
-                        GradebookStudent student = manager.findByID(id4); 
+                        int id5 = sc.nextInt(); 
+                        GradebookStudent student = manager.findByID(id5); 
                         System.out.println("Students name is: " + student.getName());
                         break;
 
@@ -56,7 +57,9 @@ public class GradebookApp {
                         break;
 
                     case 7:
-                        
+                        try {
+                            saveData(students, )
+                        }
                         break;
 
                     case 8:

@@ -19,16 +19,17 @@ public class GradebookStudent {
 
     public String describe() {
         if (grades.isEmpty()) return name + " has no grades yet.";
-        return name + "has a " + calculateAverage() + " average.";
+        return name + " has a " + calculateAverage() + " average.";
     }
 
     public double calculateAverage() {
         if(grades.size()==0) return 0.0;
-        else {int sum = 0;
+        else {
+        double sum = 0;
         for (GradeItem g : grades) {
             sum += g.getScore();
         }
-        return (double)sum/grades.size();
+        return sum/grades.size();
         }
     }
     

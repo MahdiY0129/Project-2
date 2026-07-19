@@ -4,9 +4,9 @@ public class GradeItem {
 
     public GradeItem(String t, double s){
 
-        if(s<0.0 && s>100.0) 
+        if(s<0.0 || s>100.0) 
             throw new IllegalArgumentException("Invalid input, grade must be above 0!"); 
-        if(t.trim() == null || t.trim().length() == 0) 
+        if(t == null || t.trim().length() == 0) 
             throw new IllegalArgumentException("Invalid input, title can't be empty or null!");
 
             score = s; 
