@@ -33,25 +33,39 @@ public class GradebookManager {
     }
 
     public void viewStudents(){
-        for (GradebookStudent s : students) {
-            System.out.println("Student name: " + s.getName());
+        
+        if(students.isEmpty()) throw new IllegalArgumentException("No students added yet!");
+        
+        else {
+            for (GradebookStudent s : students) {
+                System.out.println("Student name: " + s.getName());
+            }
         }
+        
     }
 
     public void addGradeToStudent(int id, String title, double score){
         for (GradebookStudent s : students) {
             if (s.getId() == id){
                 s.addGrade(new GradeItem(title, score));
+                return; 
             }
         }
+        
+        if(students.isEmpty()) throw new IllegalArgumentException("No students added yet!"); 
+        else throw new IllegalArgumentException("Student not found!"); 
     }
 
     public void viewOneStudent(int id){
         for (GradebookStudent s : students) {
             if(s.getId() == id){
                 System.out.println(s.describe());
+                return; 
             }
         }
+        
+        if(students.isEmpty()) throw new IllegalArgumentException("No students added yet!"); 
+        else throw new IllegalArgumentException("Student not found!"); 
     }
     
 }

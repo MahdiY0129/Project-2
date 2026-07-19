@@ -9,6 +9,7 @@ public class GradebookApp {
     public static void main(String[] args) {
         boolean exit = false;
         System.out.println("==== Gradebook Manager ===="); 
+        System.out.println("");
         Scanner sc = new Scanner(System.in); 
         GradebookManager manager = new GradebookManager(); 
         
@@ -97,6 +98,42 @@ public class GradebookApp {
         }
 
         out.close();
+    }
+
+    public static void loadData(String path, GradebookManager manager){
+        File file = new File(path); 
+        Scanner input; 
+        try{
+            input = new Scanner(file); 
+        }catch(FileNotFoundException e){
+            System.out.println("File not found!");
+            return; 
+        }
+
+        while(input.hasNextLine()){
+            String line = input.nextLine(); 
+
+            if(line.isEmpty()){
+                continue;
+            }
+
+            String[] parts = line.split(","); 
+            
+            if(parts[0].equalsIgnoreCase("student")){
+                int id = Integer.parseInt(parts[1]); 
+                String name = parts[2]; 
+                manager.addStudent(new GradebookStudent(id, name));
+            }
+            else if(parts[0].equalsIgnoreCase("Grade")){
+                int id = Integer.parseInt(parts[1]);
+                String title = parts[2]; 
+                double score = Double.parseDouble(parts[3]); 
+                manager.addGradeToStudent(id, title, score);
+            }
+            
+
+        }
+        
     }
 
 
