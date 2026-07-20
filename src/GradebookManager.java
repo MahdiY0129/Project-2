@@ -70,7 +70,7 @@ public class GradebookManager {
     public void viewOneStudent(int id){
         for (GradebookStudent s : students) {
             if(s.getId() == id){
-                System.out.println(s.describe());
+                s.describe();
                 return; 
             }
         }

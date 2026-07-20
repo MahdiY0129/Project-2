@@ -51,7 +51,7 @@ public class GradebookApp {
                         GradebookStudent student = manager.findByID(id5); 
                         
                         if(student == null) System.out.println("Student with id " + id5 + " was not found!");
-                        else System.out.println(student.describe());
+                        else student.describe();
                         break;
 
                     case 6:
