@@ -28,15 +28,15 @@ public class GradebookApp {
                         break;
 
                     case 2:
-                        System.out.print("Enter student id, grade title, and the score (id, title, score): ");
-                        int id2 = sc.nextInt(); 
+                        System.out.print("Enter student grade title, score, and tid (title, scrore, id): ");
                         String title = sc.next(); 
                         double score = Double.parseDouble(sc.next()); 
+                        int id2 = sc.nextInt(); 
                         manager.addGradeToStudent(id2, title, score);
                         break;
                         
                     case 3:
-                        
+                        manager.viewStudents();
                         break;
 
                     case 4:
@@ -60,7 +60,7 @@ public class GradebookApp {
 
                     case 7:
                         try {
-                            // saveData
+                            saveData(manager, "data/sample_data.txt");
                             System.out.println("Saved successfully!");
                         }catch(FileNotFoundException e){
                             System.out.println("File not found!");
