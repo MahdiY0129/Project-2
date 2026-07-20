@@ -49,16 +49,21 @@ public class GradebookApp {
                         System.out.print("Enter the student id: ");
                         int id5 = sc.nextInt(); 
                         GradebookStudent student = manager.findByID(id5); 
-                        System.out.println("Students name is: " + student.getName());
+                        
+                        if(student == null) System.out.println("Student with id " + id5 + " was not found!");
+                        else System.out.println(student.describe());
                         break;
 
                     case 6:
-
+                        loadData("data/sample_data.txt", manager);
                         break;
 
                     case 7:
                         try {
-                            saveData(students, )
+                            // saveData
+                            System.out.println("Saved successfully!");
+                        }catch(FileNotFoundException e){
+                            System.out.println("File not found!");
                         }
                         break;
 
@@ -92,7 +97,12 @@ public class GradebookApp {
     public static void saveData(ArrayList<GradebookStudent> roster, ArrayList<GradeItem> grades, String path) throws IOException {
         PrintWriter out = new PrintWriter(path);
 
-        
+        if(roster.isEmpty()) {
+            out.close();
+            throw new IllegalArgumentException("No gradebook data to save yet. Add a student or load data from a file before saving."); 
+        }
+
+
         for(GradebookStudent student : roster) {
             out.println("STUDENT," + student.getId() + "," + student.getName());
             for(GradeItem grade : student.getGrades()) {
@@ -136,6 +146,8 @@ public class GradebookApp {
             
 
         }
+        System.out.println("Load successful!");
+        input.close();
         
     }
 

@@ -10,13 +10,18 @@ public class GradebookManager {
     public void addStudent(GradebookStudent e){
 
         if(isValidID(e) == true){
-            students.add(e); 
+            students.add(e);
+            System.out.println("Student added successfully!");
         }
         else throw new IllegalArgumentException("Invalid input, ID already exists"); 
 
     }
 
     public GradebookStudent findByID(int id){
+        if(students.isEmpty()){
+            throw new IllegalArgumentException("No students in the gradebook yet. Add or load data first."); 
+        }
+        
         for (GradebookStudent s : students) {
             if (s.getId() == id) return s; 
         }
@@ -37,23 +42,25 @@ public class GradebookManager {
         if(students.isEmpty()) throw new IllegalArgumentException("No students added yet!");
         
         else {
+            System.out.println("All Students: ");
             for (GradebookStudent s : students) {
-                System.out.println("Student name: " + s.getName());
+                System.out.println(s.getId() + " - " + s.getName() + " - Average: " + s.calculateAverage());
             }
         }
-        
+
     }
 
     public void addGradeToStudent(int id, String title, double score){
         for (GradebookStudent s : students) {
             if (s.getId() == id){
                 s.addGrade(new GradeItem(title, score));
+                System.out.println("Grade added successfully!");
                 return; 
             }
         }
         
         if(students.isEmpty()) throw new IllegalArgumentException("No students added yet!"); 
-        else throw new IllegalArgumentException("Student not found!"); 
+        else throw new IllegalArgumentException("No student found with id 999. Grade was not added."); 
     }
 
     public void viewOneStudent(int id){

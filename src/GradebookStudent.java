@@ -6,7 +6,7 @@ public class GradebookStudent {
     private ArrayList<GradeItem> grades;
 
     public GradebookStudent(int i, String n) {
-        if(i <= 0) throw new IllegalArgumentException("Enter a valid ID.");
+        if(i <= 0) throw new IllegalArgumentException("Invalid id, must be greater than 0!");
         if (n == null || n.trim().isEmpty()) throw new IllegalArgumentException("Write a proper name.");        
         id = i;
         name = n;
