@@ -1,7 +1,5 @@
 STUDENT,101,Alice Chen
 GRADE,101,Homework 1,88.0
 GRADE,101,Quiz 1,92.0
-GRADE,101,math,97.0
 STUDENT,102,Bob Kim
 GRADE,102,Homework 1,75.0
-STUDENT,105,Mahdi,

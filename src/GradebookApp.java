@@ -1,5 +1,6 @@
 import java.util.Scanner; 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +13,6 @@ public class GradebookApp {
         System.out.println("");
         Scanner sc = new Scanner(System.in); 
         GradebookManager manager = new GradebookManager(); 
-        ArrayList<GradebookStudent> roster = new ArrayList<>();
         
         while(exit == false){
             try{
@@ -33,7 +33,7 @@ public class GradebookApp {
                         String line = sc.nextLine().trim(); 
                         String[] parts = line.split(","); 
                         
-                        String title = parts[0].trim(); 8
+                        String title = parts[0].trim(); 
                         double score = Double.parseDouble(parts[1].trim()); 
                         int id2 = Integer.parseInt(parts[2].trim()); 
                         manager.addGradeToStudent(id2, title, score);
@@ -78,10 +78,14 @@ public class GradebookApp {
                     default:
                         throw new IllegalArgumentException("Invalid input, number is not in menu!"); 
                 }
-            } catch(IllegalArgumentException e){
+            }catch(IllegalArgumentException e){
                 System.out.println(e.getMessage());
+            }catch(InputMismatchException e){
+                System.out.println("Invalid input, enter a number!");
+                sc.next(); 
             }catch(Exception e){
                 System.out.println("Invalid input!");
+                sc.next();
             }
         }
     }
