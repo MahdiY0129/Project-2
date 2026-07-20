@@ -7,6 +7,10 @@ public class GradebookManager {
         students = new ArrayList<>(); 
     }
 
+    public ArrayList<GradebookStudent> getStudents() {
+        return new ArrayList<> (students);
+    }
+
     public void addStudent(GradebookStudent e){
 
         if(isValidID(e) == true){

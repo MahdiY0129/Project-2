@@ -94,7 +94,8 @@ public class GradebookApp {
         System.out.print("Enter choice: ");
     }
 
-    public static void saveData(ArrayList<GradebookStudent> roster, ArrayList<GradeItem> grades, String path) throws IOException {
+    public static void saveData(GradebookManager manager, String path) throws IOException {
+        ArrayList<GradebookStudent> roster = manager.getStudents();
         PrintWriter out = new PrintWriter(path);
 
         if(roster.isEmpty()) {
