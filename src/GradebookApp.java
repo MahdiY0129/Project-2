@@ -17,7 +17,8 @@ public class GradebookApp {
         while(exit == false){
             try{
                 printMenu(); 
-                int choice = sc.nextInt(); 
+                int choice = sc.nextInt();
+                sc.nextLine(); 
 
                 switch (choice) {
                     case 1:
@@ -29,9 +30,12 @@ public class GradebookApp {
 
                     case 2:
                         System.out.print("Enter student grade title, score, and tid (title, scrore, id): ");
-                        String title = sc.next(); 
-                        double score = Double.parseDouble(sc.next()); 
-                        int id2 = sc.nextInt(); 
+                        String line = sc.nextLine().trim(); 
+                        String[] parts = line.split(","); 
+                        
+                        String title = parts[0].trim(); 8
+                        double score = Double.parseDouble(parts[1].trim()); 
+                        int id2 = Integer.parseInt(parts[2].trim()); 
                         manager.addGradeToStudent(id2, title, score);
                         break;
                         
