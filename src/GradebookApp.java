@@ -144,6 +144,7 @@ public class GradebookApp {
     public static void loadData(String path, GradebookManager manager){
         File file = new File(path); 
         Scanner input; 
+        int count = 0; 
         try{
             input = new Scanner(file); 
         }catch(FileNotFoundException e){
@@ -160,21 +161,28 @@ public class GradebookApp {
 
             String[] parts = line.split(","); 
             
-            if(parts[0].equalsIgnoreCase("student")){
-                int id = Integer.parseInt(parts[1]); 
-                String name = parts[2]; 
-                manager.addStudent(new GradebookStudent(id, name));
-            }
-            else if(parts[0].equalsIgnoreCase("Grade")){
-                int id = Integer.parseInt(parts[1]);
-                String title = parts[2]; 
-                double score = Double.parseDouble(parts[3]); 
-                manager.addGradeToStudent(id, title, score);
+            try{
+                if(parts[0].equalsIgnoreCase("student")){
+                    int id = Integer.parseInt(parts[1]); 
+                    String name = parts[2]; 
+                    manager.addStudent(new GradebookStudent(id, name));
+                    count++; 
+                }
+                else if(parts[0].equalsIgnoreCase("Grade")){
+                    int id = Integer.parseInt(parts[1]);
+                    String title = parts[2]; 
+                    double score = Double.parseDouble(parts[3]); 
+                    manager.addGradeToStudent(id, title, score);
+                    count++; 
+                }
+            }catch(Exception e){
+                System.out.println("Something went wrong parsing a line!");
             }
             
 
         }
         System.out.println("Load successful!");
+        System.out.println("Students loaded: " + count);
         input.close();
         
     }
