@@ -12,20 +12,19 @@ public class GradebookManager {
     }
 
     public void sort() {
-        GradebookStudent temp;
-        int value = 0;
+        
         for(int i = 0; i < students.size(); i++) {
-            GradebookStudent smaller = students.get(i);
+            int minIndex = i;
             for(int j = i + 1; j < students.size(); j++) {
-                value = smaller.getName().compareTo(students.get(j).getName());
-                if(value>0) {
-                    temp = students.get(i);
-                    students.set(i,students.get(j));
-                    students.set(j,temp);
+                if (students.get(j).getName().compareTo(students.get(minIndex).getName()) < 0) minIndex = j;
                 }
+            if(minIndex!=i) {
+                GradebookStudent temp = students.get(i);
+                students.set(i,students.get(minIndex));
+                students.set(minIndex, temp);
+            }
             }
         }
-    }
 
     public void addStudent(GradebookStudent e){
 
@@ -76,7 +75,8 @@ public class GradebookManager {
         else {
             System.out.println("All Students (sorted alphabetically A-Z):");
             for (GradebookStudent s : students) {
-                System.out.printf(s.getId() + " - " + s.getName() + " - Average: %.2f", s.calculateAverage());
+                if(s.calculateAverage()==0) System.out.printf("%d - %s - Average: 0.00 - (no grades yet)%n", s.getId(), s.getName());
+                else System.out.printf("%d - %s - Average: %.2f%n", s.getId(), s.getName(), s.calculateAverage());
             }
         }
 
@@ -92,7 +92,7 @@ public class GradebookManager {
         }
         
         if(students.isEmpty()) throw new IllegalArgumentException("No students added yet!"); 
-        else throw new IllegalArgumentException("No student found with id 999. Grade was not added."); 
+        else throw new IllegalArgumentException("No student found with id " + id + ". Grade was not added."); 
     }
 
     public void viewOneStudent(int id){

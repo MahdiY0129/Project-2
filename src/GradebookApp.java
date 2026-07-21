@@ -27,7 +27,7 @@ public class GradebookApp {
 
                         String[] parts = input.split(","); 
                         int id = Integer.parseInt(parts[0].trim()); 
-                        String name = parts[1]; 
+                        String name = parts[1].trim(); 
                         manager.addStudent(new GradebookStudent(id, name));
                         break;
 
@@ -59,10 +59,27 @@ public class GradebookApp {
                         GradebookStudent student = manager.findByID(id5); 
                         
                         if(student == null) System.out.println("Student with id " + id5 + " was not found!");
-                        else student.describe();
+                        else System.out.printf("Found:%n%d - %s%nAverage: %.2f%n", student.getId(), student.getName(), student.calculateAverage());
+                        break;
+                    
+                    case 6:
+                        loadData("data/sample_data.txt", manager);
                         break;
 
-                    case 6:
+                    case 7:
+                        try {
+                            saveData(manager, "data/sample_data.txt");
+                            System.out.println("Saved successfully!");
+                        }catch(FileNotFoundException e){
+                            System.out.println("File not found!");
+                        }
+                        break;
+
+                    case 8:
+                        exit = true; 
+                        break;
+                    
+                    case 9:
                     System.out.print("Enter the student name (can be partial): ");
                         String studentName = sc.next(); 
                         manager.sort();
@@ -76,23 +93,6 @@ public class GradebookApp {
                         }
                         break;
                     
-                    case 7:
-                        loadData("data/sample_data.txt", manager);
-                        break;
-
-                    case 8:
-                        try {
-                            saveData(manager, "data/sample_data.txt");
-                            System.out.println("Saved successfully!");
-                        }catch(FileNotFoundException e){
-                            System.out.println("File not found!");
-                        }
-                        break;
-
-                    case 9:
-                        exit = true; 
-                        break;
-                
                     default:
                         throw new IllegalArgumentException("Invalid input, number is not in menu!"); 
                 }
@@ -114,10 +114,10 @@ public class GradebookApp {
         System.out.println("3. View All Students");
         System.out.println("4. View Student Details");
         System.out.println("5. Search Student by ID");
-        System.out.println("6. Search Student by Name");
-        System.out.println("7. Load Data from File");
-        System.out.println("8. Save Data to File");
-        System.out.println("9. Exit");
+        System.out.println("6. Load Data from File");
+        System.out.println("7. Save Data to File");
+        System.out.println("8. Exit");
+        System.out.println("9. Search Student by Name");
         System.out.print("Enter choice: ");
     }
 
@@ -144,18 +144,21 @@ public class GradebookApp {
     public static void loadData(String path, GradebookManager manager){
         File file = new File(path); 
         Scanner input; 
-        int count = 0; 
         try{
             input = new Scanner(file); 
         }catch(FileNotFoundException e){
-            System.out.println("File not found!");
+            System.out.println("Could not find file:" + path);
+            System.out.println("Gradebook was not changed.");
             return; 
         }
+
+        int studentsLoaded = 0;
+        int gradesLoaded = 0;
 
         while(input.hasNextLine()){
             String line = input.nextLine(); 
 
-            if(line.isEmpty()){
+            if(line.trim().isEmpty()){
                 continue;
             }
 
@@ -163,26 +166,30 @@ public class GradebookApp {
             
             try{
                 if(parts[0].equalsIgnoreCase("student")){
-                    int id = Integer.parseInt(parts[1]); 
-                    String name = parts[2]; 
+                    int id = Integer.parseInt(parts[1].trim()); 
+                    String name = parts[2].trim(); 
                     manager.addStudent(new GradebookStudent(id, name));
-                    count++; 
+                    studentsLoaded++; 
                 }
                 else if(parts[0].equalsIgnoreCase("Grade")){
-                    int id = Integer.parseInt(parts[1]);
-                    String title = parts[2]; 
-                    double score = Double.parseDouble(parts[3]); 
+                    int id = Integer.parseInt(parts[1].trim());
+                    String title = parts[2].trim(); 
+                    double score = Double.parseDouble(parts[3].trim()); 
                     manager.addGradeToStudent(id, title, score);
-                    count++; 
+                    gradesLoaded++; 
+                }
+                else {
+                    System.out.println("Skipping unrecognized line:" + line);
                 }
             }catch(Exception e){
-                System.out.println("Something went wrong parsing a line!");
+                System.out.println("Skipping malformed line: " + line);
             }
             
 
         }
-        System.out.println("Load successful!");
-        System.out.println("Students loaded: " + count);
+        System.out.println("Data loaded successfully.");
+        System.out.println("Students loaded: " + studentsLoaded);
+        System.out.println("Grades loaded: " + gradesLoaded);
         input.close();
         
     }

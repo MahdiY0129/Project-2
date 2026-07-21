@@ -18,14 +18,14 @@ public class GradebookStudent {
     }
 
     public void describe() {
-        System.out.println("Student details:");
+        System.out.println("Student Details:");
         System.out.println("ID: " + id);
         System.out.println("Name: " + name);
         System.out.println("\nGrades:");
         if (grades.isEmpty()) System.out.println(name + " has no grades yet.");
         for(GradeItem g : grades) System.out.println(g.getTitle() + ": " + g.getScore());
         System.out.println();
-        System.out.printf("Average: %.2f", calculateAverage());
+        System.out.printf("Average: %.2f%n", calculateAverage());
     }
 
     public double calculateAverage() {
