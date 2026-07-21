@@ -22,21 +22,23 @@ public class GradebookApp {
 
                 switch (choice) {
                     case 1:
-                        System.out.print("Enter student name and id in this format (name, id): ");
-                        String input = sc.next();
-                        String name = input.replace(",","");
-                        int id = sc.nextInt(); 
+                        System.out.print("Enter student name and id in this format (id, name): ");
+                        String input = sc.nextLine().trim();
+
+                        String[] parts = input.split(","); 
+                        int id = Integer.parseInt(parts[0].trim()); 
+                        String name = parts[1]; 
                         manager.addStudent(new GradebookStudent(id, name));
                         break;
 
                     case 2:
                         System.out.print("Enter student grade title, score, and id (title, score, id): ");
                         String line = sc.nextLine().trim(); 
-                        String[] parts = line.split(","); 
+                        String[] parts1 = line.split(","); 
                         
-                        String title = parts[0].trim(); 
-                        double score = Double.parseDouble(parts[1].trim()); 
-                        int id2 = Integer.parseInt(parts[2].trim()); 
+                        String title = parts1[0].trim(); 
+                        double score = Double.parseDouble(parts1[1].trim()); 
+                        int id2 = Integer.parseInt(parts1[2].trim()); 
                         manager.addGradeToStudent(id2, title, score);
                         break;
                         

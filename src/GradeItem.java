@@ -18,14 +18,5 @@ public class GradeItem {
 
     public double getScore(){return score;}
 
-    public void setScore(double s){
-        if(s<0.0 && s>100.0) 
-            throw new IllegalArgumentException("Invalid input, grade must be above 0!");
-
-        
-        score = s; 
-    
-    }
-
 
 }
