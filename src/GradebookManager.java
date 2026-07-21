@@ -56,7 +56,7 @@ public class GradebookManager {
         }
         String newName = name.toLowerCase();
         for (GradebookStudent s : students) {
-            if(s.getName().contains(newName)) list.add(s);
+            if(s.getName().toLowerCase().contains(newName)) list.add(s);
         }
         return list;
     }
@@ -76,7 +76,7 @@ public class GradebookManager {
         else {
             System.out.println("All Students (sorted alphabetically A-Z):");
             for (GradebookStudent s : students) {
-                System.out.println(s.getId() + " - " + s.getName() + " - Average: " + s.calculateAverage());
+                System.out.printf(s.getId() + " - " + s.getName() + " - Average: %.2f", s.calculateAverage());
             }
         }
 

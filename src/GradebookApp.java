@@ -68,7 +68,7 @@ public class GradebookApp {
                         manager.sort();
                         ArrayList<GradebookStudent> list = manager.findByName(studentName);
                         
-                        if(list == null) System.out.println("There were no students with the name " + studentName);
+                        if(list.isEmpty()) System.out.println("There were no students with the name " + studentName);
                         else {
                             for(GradebookStudent s : list)
                             s.describe();

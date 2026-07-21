@@ -17,9 +17,15 @@ public class GradebookStudent {
         grades.add(g);
     }
 
-    public String describe() {
-        if (grades.isEmpty()) return name + " has no grades yet.";
-        return name + " has a " + calculateAverage() + " average.";
+    public void describe() {
+        System.out.println("Student details:");
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("\nGrades:");
+        if (grades.isEmpty()) System.out.println(name + " has no grades yet.");
+        for(GradeItem g : grades) System.out.println(g.getTitle() + ": " + g.getScore());
+        System.out.println();
+        System.out.printf("Average: %.2f", calculateAverage());
     }
 
     public double calculateAverage() {
