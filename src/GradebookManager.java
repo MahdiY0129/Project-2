@@ -3,15 +3,15 @@ import java.util.ArrayList;
 public class GradebookManager {
     private ArrayList<GradebookStudent> students; 
 
-    public GradebookManager(){
+    public GradebookManager(){ //constructor that creates the ArrayList
         students = new ArrayList<>();
     }
 
-    public ArrayList<GradebookStudent> getStudents() {
+    public ArrayList<GradebookStudent> getStudents() {// returns copy of students array
         return new ArrayList<> (students);
     }
 
-    public void sort() {
+    public void sort() { // Sorts through the array in alphabetical order using comparators 
         
         for(int i = 0; i < students.size(); i++) {
             int minIndex = i;
@@ -26,9 +26,9 @@ public class GradebookManager {
             }
         }
 
-    public void addStudent(GradebookStudent e){
+    public void addStudent(GradebookStudent e){ // Adds a student object to manager
 
-        if(isValidID(e) == true){
+        if(isValidID(e) == true){ // validates the id is not already taken, and throws exception if it is
             students.add(e);
             System.out.println("Student added successfully!");
         }
@@ -36,7 +36,7 @@ public class GradebookManager {
 
     }
 
-    public GradebookStudent findByID(int id){
+    public GradebookStudent findByID(int id){ // Loops through the array and checks if any students have the id entered
         if(students.isEmpty()){
             throw new IllegalArgumentException("No students in the gradebook yet. Add or load data first."); 
         }
@@ -48,7 +48,7 @@ public class GradebookManager {
         return null; 
     }
 
-    public ArrayList<GradebookStudent> findByName(String name) {
+    public ArrayList<GradebookStudent> findByName(String name) { //Loops through the array and checks if it contains the name that they entered
         ArrayList<GradebookStudent> list = new ArrayList<>();
         if(students.isEmpty()){
             throw new IllegalArgumentException("No students in the gradebook yet. Add or load data first."); 
@@ -60,7 +60,7 @@ public class GradebookManager {
         return list;
     }
 
-    public boolean isValidID(GradebookStudent e){
+    public boolean isValidID(GradebookStudent e){// Helper method to check if the id entered is already taken or not
         for (GradebookStudent s : students) {
             if (e.getId() == s.getId()) return false; 
         }
@@ -68,7 +68,7 @@ public class GradebookManager {
         return true; 
     }
 
-    public void viewStudents(){
+    public void viewStudents(){ // Prints out all the students details in the expected format
         
         if(students.isEmpty()) throw new IllegalArgumentException("No students added yet!");
         
@@ -82,7 +82,7 @@ public class GradebookManager {
 
     }
 
-    public void addGradeToStudent(int id, String title, double score){
+    public void addGradeToStudent(int id, String title, double score){ // adds a grade to a student object using the addGrade method in student object
         for (GradebookStudent s : students) {
             if (s.getId() == id){
                 s.addGrade(new GradeItem(title, score));
@@ -95,7 +95,7 @@ public class GradebookManager {
         else throw new IllegalArgumentException("No student found with id " + id + ". Grade was not added."); 
     }
 
-    public void viewOneStudent(int id){
+    public void viewOneStudent(int id){//Loops through and finds the student that the user wants and the prints only their details
         for (GradebookStudent s : students) {
             if(s.getId() == id){
                 s.describe();

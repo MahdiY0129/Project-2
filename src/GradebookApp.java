@@ -8,19 +8,19 @@ import java.io.PrintWriter;
 
 public class GradebookApp {
     public static void main(String[] args) {
-        boolean exit = false;
+        boolean exit = false; // Boolean for the while loop
         System.out.println("==== Gradebook Manager ===="); 
         System.out.println("");
         Scanner sc = new Scanner(System.in); 
         GradebookManager manager = new GradebookManager(); 
         
         while(exit == false){
-            try{
+            try{ // Sets up a try and catch to catch any valdiation errors, IO exceptions, or scanner exceptions
                 printMenu(); 
                 int choice = sc.nextInt();
                 sc.nextLine(); 
 
-                switch (choice) {
+                switch (choice) {//Switch for the main menu
                     case 1:
                         System.out.print("Enter student name and id in this format (id, name): ");
                         String input = sc.nextLine().trim();
@@ -96,7 +96,7 @@ public class GradebookApp {
                     default:
                         throw new IllegalArgumentException("Invalid input, number is not in menu!"); 
                 }
-            }catch(IllegalArgumentException e){
+            }catch(IllegalArgumentException e){//Catches the possible and common exceptions
                 System.out.println(e.getMessage());
             }catch(InputMismatchException e){
                 System.out.println("Invalid input, enter a number!");
@@ -108,7 +108,7 @@ public class GradebookApp {
         }
     }
 
-    public static void printMenu(){
+    public static void printMenu(){//helper method to to print out the menu instead of having it in the main method
         System.out.println("1. Add Student");
         System.out.println("2. Add Grade to Student");
         System.out.println("3. View All Students");
@@ -121,17 +121,17 @@ public class GradebookApp {
         System.out.print("Enter choice: ");
     }
 
-    public static void saveData(GradebookManager manager, String path) throws IOException {
+    public static void saveData(GradebookManager manager, String path) throws IOException { //Saves data or prints the student array into a file
         ArrayList<GradebookStudent> roster = manager.getStudents();
         PrintWriter out = new PrintWriter(path);
 
-        if(roster.isEmpty()) {
+        if(roster.isEmpty()) {//Validator to make sure that there is actually any data in the roster
             out.close();
             throw new IllegalArgumentException("No gradebook data to save yet. Add a student or load data from a file before saving."); 
         }
 
 
-        for(GradebookStudent student : roster) {
+        for(GradebookStudent student : roster) {//Loops through and prints the information into a file
             out.println("STUDENT," + student.getId() + "," + student.getName());
             for(GradeItem grade : student.getGrades()) {
                 out.println("GRADE," + student.getId() + "," + grade.getTitle() + "," + grade.getScore());
@@ -141,10 +141,10 @@ public class GradebookApp {
         out.close();
     }
 
-    public static void loadData(String path, GradebookManager manager){
+    public static void loadData(String path, GradebookManager manager){//loads the data from the file onto an aray
         File file = new File(path); 
         Scanner input; 
-        try{
+        try{//sets up scanner and handles FNF exception
             input = new Scanner(file); 
         }catch(FileNotFoundException e){
             System.out.println("Could not find file:" + path);
@@ -164,7 +164,7 @@ public class GradebookApp {
 
             String[] parts = line.split(","); 
             
-            try{
+            try{//parses the data and adds it to the manager object 
                 if(parts[0].equalsIgnoreCase("student")){
                     int id = Integer.parseInt(parts[1].trim()); 
                     String name = parts[2].trim(); 
@@ -181,13 +181,13 @@ public class GradebookApp {
                 else {
                     System.out.println("Skipping unrecognized line:" + line);
                 }
-            }catch(Exception e){
+            }catch(Exception e){//if any exceptions occur then there was a bad line
                 System.out.println("Skipping malformed line: " + line);
             }
             
 
         }
-        System.out.println("Data loaded successfully.");
+        System.out.println("Data loaded successfully.");//prints out only if the load was succesfull and prints out the students and grades loaded
         System.out.println("Students loaded: " + studentsLoaded);
         System.out.println("Grades loaded: " + gradesLoaded);
         input.close();
