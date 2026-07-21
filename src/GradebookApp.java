@@ -23,13 +23,14 @@ public class GradebookApp {
                 switch (choice) {
                     case 1:
                         System.out.print("Enter student name and id in this format (name, id): ");
-                        String name = sc.next(); 
+                        String input = sc.next();
+                        String name = input.replace(",","");
                         int id = sc.nextInt(); 
                         manager.addStudent(new GradebookStudent(id, name));
                         break;
 
                     case 2:
-                        System.out.print("Enter student grade title, score, and tid (title, scrore, id): ");
+                        System.out.print("Enter student grade title, score, and id (title, score, id): ");
                         String line = sc.nextLine().trim(); 
                         String[] parts = line.split(","); 
                         
@@ -40,6 +41,7 @@ public class GradebookApp {
                         break;
                         
                     case 3:
+                        manager.sort();
                         manager.viewStudents();
                         break;
 
@@ -59,10 +61,24 @@ public class GradebookApp {
                         break;
 
                     case 6:
+                    System.out.print("Enter the student name (can be partial): ");
+                        String studentName = sc.next(); 
+                        manager.sort();
+                        ArrayList<GradebookStudent> list = manager.findByName(studentName);
+                        
+                        if(list == null) System.out.println("There were no students with the name " + studentName);
+                        else {
+                            for(GradebookStudent s : list)
+                            s.describe();
+                            System.out.println();
+                        }
+                        break;
+                    
+                    case 7:
                         loadData("data/sample_data.txt", manager);
                         break;
 
-                    case 7:
+                    case 8:
                         try {
                             saveData(manager, "data/sample_data.txt");
                             System.out.println("Saved successfully!");
@@ -71,7 +87,7 @@ public class GradebookApp {
                         }
                         break;
 
-                    case 8:
+                    case 9:
                         exit = true; 
                         break;
                 
@@ -96,9 +112,10 @@ public class GradebookApp {
         System.out.println("3. View All Students");
         System.out.println("4. View Student Details");
         System.out.println("5. Search Student by ID");
-        System.out.println("6. Load Data from File");
-        System.out.println("7. Save Data to File");
-        System.out.println("8. Exit");
+        System.out.println("6. Search Student by Name");
+        System.out.println("7. Load Data from File");
+        System.out.println("8. Save Data to File");
+        System.out.println("9. Exit");
         System.out.print("Enter choice: ");
     }
 

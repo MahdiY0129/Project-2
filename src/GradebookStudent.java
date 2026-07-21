@@ -21,10 +21,11 @@ public class GradebookStudent {
         System.out.println("Student details:");
         System.out.println("ID: " + id);
         System.out.println("Name: " + name);
-        System.out.println("Grades:");
+        System.out.println("\nGrades:");
         if (grades.isEmpty()) System.out.println(name + " has no grades yet.");
         for(GradeItem g : grades) System.out.println(g.getTitle() + ": " + g.getScore());
-        System.out.println(calculateAverage());
+        System.out.println();
+        System.out.println("Average: " + calculateAverage());
     }
 
     public double calculateAverage() {
