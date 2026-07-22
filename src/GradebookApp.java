@@ -43,7 +43,6 @@ public class GradebookApp {
                         break;
                         
                     case 3:
-                        manager.sort();
                         manager.viewStudents();
                         break;
 
@@ -75,14 +74,13 @@ public class GradebookApp {
                         }
                         break;
 
-                    case 8:
+                    case 8: //BONUS - PARTIAL SEARCH (CASE-INSENSITIVE)
                         exit = true; 
                         break;
                     
-                    case 9:
+                    case 9: //BONUS
                     System.out.print("Enter the student name (can be partial): ");
                         String studentName = sc.next(); 
-                        manager.sort();
                         ArrayList<GradebookStudent> list = manager.findByName(studentName);
                         
                         if(list.isEmpty()) System.out.println("There were no students with the name " + studentName);
@@ -92,6 +90,12 @@ public class GradebookApp {
                             System.out.println();
                         }
                         break;
+                    
+                    case 10: //BONUS - SORTING (A-Z)
+                    manager.sort();
+                    manager.viewStudents();
+                    break;
+
                     
                     default:
                         throw new IllegalArgumentException("Invalid input, number is not in menu!"); 
@@ -103,7 +107,6 @@ public class GradebookApp {
                 sc.next(); 
             }catch(Exception e){
                 System.out.println("Invalid input!");
-                sc.next();
             }
         }
     }
@@ -117,7 +120,8 @@ public class GradebookApp {
         System.out.println("6. Load Data from File");
         System.out.println("7. Save Data to File");
         System.out.println("8. Exit");
-        System.out.println("9. Search Student by Name");
+        System.out.println("9. Search Student by Name - BONUS");
+        System.out.println("10 View All Students (Sorted A-Z) - BONUS");
         System.out.print("Enter choice: ");
     }
 
